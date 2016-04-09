@@ -1,25 +1,12 @@
-<html>
-  <head>
-    <title> Blog </title>
-  </head>
-  <body>
-    <h1> Pierwszy duzy tytul </h1>
-
-    <h2> Drugi tytul </h2>
-
-    <h3> Trzeci tytul </h3>
-
-    <p>
-      {% for post1 in post %}
-          <div>
-              <p>published: {{ post1.published_date }}</p>
-              <h1><a href="">{{ post1.title }}</a></h1>
-              <p>{{ post1.text|linebreaks }}</p>
-          </div>
-      {% endfor %}
-    </p>
-
-
-
-  </body>
-</html>
+{% extends "blog/base.html" %}
+{% block content %}
+                {% for post1 in post %}
+                    <div class="post">
+                        <div class="date">
+                            <p>published: {{ post1.published_date }}</p>
+                        </div>
+                        <h1><a href="{% url 'post_detail' pk=post1.pk %}">{{ post1.title }}</a></h1>
+                        <p>{{ post1.text|truncatechars:30 }}</p>
+                    </div>
+                {% endfor %}
+{% endblock %}
